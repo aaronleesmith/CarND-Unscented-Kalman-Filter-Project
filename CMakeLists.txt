@@ -9,4 +9,6 @@ set(sources
    src/main.cpp
    src/tools.cpp)
 
+include_directories(src/Eigen)
+
 add_executable(UnscentedKF ${sources})
