@@ -24,7 +24,7 @@ public:
   bool use_radar_;
 
   // The last timestamp, used to calculate dt.
-  long long previous_timestamp_;
+  long long time_us_;
 
   ///* State dimension
   int n_x_;
@@ -158,8 +158,7 @@ public:
    */
   void Init(MeasurementPackage meas_package);
 
-  // todo: shuold this be a long long?
-  double CalculateDt(double new_timestamp);
+  float CalculateDt(long new_timestamp);
 
 };
 
