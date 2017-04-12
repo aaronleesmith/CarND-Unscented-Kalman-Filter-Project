@@ -12,6 +12,8 @@ using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using std::vector;
 
+#define ZERO 1e-9;
+
 
 /**
  * Initializes Unscented Kalman filter
@@ -286,12 +288,15 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
     double v1 = cos(yaw)*v;
     double v2 = sin(yaw)*v;
 
+    double zero = 1e-9;
+
     // measurement model
     Zsig(0,i) = sqrt(p_x*p_x + p_y*p_y);                        //r
-    Zsig(1,i) = atan2(p_y,p_x);
+    Zsig(1,i) = atan2(p_y, p_x < zero ? zero : p_x);
+
     //phi
     double denom = sqrt(p_x*p_x + p_y*p_y);
-    denom = denom < 1e-9 ? 1e-9 : denom;
+    denom = denom < zero ? zero : denom;
 
     Zsig(2,i) = (p_x*v1 + p_y*v2 ) / denom;   //r_dot
   }
