@@ -337,7 +337,7 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
 
   //angle normalization
 
-  z_diff(1) = normalize_angle(z_diff(1));\
+  z_diff(1) = normalize_angle(z_diff(1));
 
   //update state mean and covariance matrix
   x_ = x_ + K * z_diff;
